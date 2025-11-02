@@ -17,16 +17,24 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, String> request) {
-        String username = request.get("username");
-        String email = request.get("email");
-        String password = request.get("password");
-        return ResponseEntity.ok(userService.registerUser(username, email, password));
+        try {
+            String username = request.get("username");
+            String email = request.get("email");
+            String password = request.get("password");
+            return ResponseEntity.ok(userService.registerUser(username, email, password));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody Map<String, String> request) {
-        String username = request.get("username");
-        String password = request.get("password");
-        return ResponseEntity.ok(userService.loginUser(username, password));
+        try {
+            String username = request.get("username");
+            String password = request.get("password");
+            return ResponseEntity.ok(userService.loginUser(username, password));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
