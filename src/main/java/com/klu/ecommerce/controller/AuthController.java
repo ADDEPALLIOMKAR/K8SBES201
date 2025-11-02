@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @CrossOrigin
 public class AuthController {
     private final UserService userService;
@@ -15,7 +15,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, String> request) {
         String username = request.get("username");
         String email = request.get("email");
